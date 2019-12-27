@@ -71,8 +71,8 @@ while True:
     canvas.delete("all")
     for i in range(lines_count * lines_count):
         if points_list[i]:
-            x = i % lines_count
-            y = i / lines_count
+            x = int(i % lines_count)
+            y = int(i / lines_count)
             colors = 'green'
             x0 = x * cell_width
             y0 = y * cell_width
