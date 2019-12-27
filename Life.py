@@ -1,17 +1,13 @@
 import time
 from random import *
-from tkinter import *
+from LifeGui import LifeGui
 
 
 class Life:
     def __init__(self, lines_count):
         self.lines_count = lines_count
-        self.cell_width = 30
-        self.size = lines_count * self.cell_width
-        self.root = Tk()
-        self.canvas = Canvas(self.root, width=self.size, height=self.size)
-        self.canvas.pack()
         self.points_list = list()
+        self.gui = LifeGui(lines_count, self.points_list)
         for i in range(self.lines_count * self.lines_count):
             a = randint(0, 10)
             if a < 3:
@@ -68,20 +64,8 @@ class Life:
         for i in list_for_del:
             self.points_list[i] = False
 
-    def redraw(self):
-        self.canvas.delete("all")
-        for i in range(self.lines_count * self.lines_count):
-            if self.points_list[i]:
-                x = int(i % self.lines_count)
-                y = int(i / self.lines_count)
-                colors = 'green'
-                x0 = x * self.cell_width
-                y0 = y * self.cell_width
-                self.canvas.create_rectangle(x0, y0, x0 + self.cell_width, y0 + self.cell_width, fill=colors)
-        self.root.update()
-
     def play(self):
         while True:
             self.update_cells()
-            self.redraw()
+            self.gui.redraw()
             time.sleep(1)
